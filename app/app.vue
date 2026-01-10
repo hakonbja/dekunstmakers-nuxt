@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { useStrapi } from '../composables/useStrapi'
+import { fetchStrapi } from '../utils/strapi'
 
 interface Artist {
   id: number
@@ -44,7 +44,6 @@ interface StrapiResponse {
 const { data: artists, pending, error } = await useAsyncData<Artist[]>(
   'artists',
   async () => {
-    const { fetchStrapi } = useStrapi()
     const response = await fetchStrapi<StrapiResponse>('/artists?populate=*')
     return response.data || []
   }
