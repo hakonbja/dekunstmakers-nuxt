@@ -1,0 +1,83 @@
+name: Deploy to Hetzner
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Release tag to deploy (leave empty for latest release, or enter specific tag like v1.0.0)'
+        required: false
+        type: string
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Get latest release tag
+        id: get_tag
+        if: github.event.inputs.release_tag == ''
+        run: |
+          TAG=$(gh api repos/${{ github.repository }}/releases/latest --jq .tag_name)
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set deployment tag
+        id: set_tag
+        run: |
+          if [ -n "${{ github.event.inputs.release_tag }}" ]; then
+            echo "tag=${{ github.event.inputs.release_tag }}" >> $GITHUB_OUTPUT
+          else
+            echo "tag=${{ steps.get_tag.outputs.tag }}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.set_tag.outputs.tag }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: false
+          tags: |
+            dekunstmakers:${{ steps.set_tag.outputs.tag }}
+            dekunstmakers:latest
+          build-args: |
+            STRAPI_API_TOKEN=${{ secrets.STRAPI_API_TOKEN }}
+            NUXT_PUBLIC_STRAPI_URL=${{ secrets.NUXT_PUBLIC_STRAPI_URL }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          outputs: type=docker,dest=/tmp/image.tar
+
+      - name: Save image
+        run: |
+          docker load -i /tmp/image.tar
+          docker save dekunstmakers:${{ steps.set_tag.outputs.tag }} dekunstmakers:latest | gzip > image.tar.gz
+
+      - name: Deploy to Hetzner server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "image.tar.gz"
+          target: "/tmp/"
+          strip_components: 0
+
+      - name: Load and deploy container on server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            docker load < /tmp/image.tar.gz
+            docker tag dekunstmakers:${{ steps.set_tag.outputs.tag }} dekunstmakers:latest
+            cd /root/dekunstmakers-infra
+            docker-compose up -d frontend
+            docker image prune -f
