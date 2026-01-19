@@ -2,6 +2,11 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
+  nitro: {
+    prerender: {
+      crawlLinks: true, // Automatically discover and pre-render all linked pages
+    },
+  },
   runtimeConfig: {
     strapiApiToken: process.env.STRAPI_API_TOKEN,
     public: {
