@@ -10,6 +10,10 @@ on:
   repository_dispatch:
     types: [strapi-content-updated]
 
+concurrency:
+  group: deploy-to-hetzner
+  cancel-in-progress: false
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
