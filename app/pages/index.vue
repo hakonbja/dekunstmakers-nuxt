@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-  import { fetchStrapi } from '../../utils/strapi'
+  import { ArtistRepository } from '../../utils/artistRepository'
 
   interface Artist {
     id: number
@@ -37,17 +37,5 @@
     art_pieces?: any[]
   }
   
-  interface StrapiResponse {
-    data: Artist[]
-    meta?: any
-  }
-  
-  const { data: artists, pending, error } = await useAsyncData<Artist[]>(
-    'artists',
-    async () => {
-      const response = await fetchStrapi<StrapiResponse>('/artists?populate=*')
-      return response.data || []
-    }
-  )
-
+  const { data: artists, pending, error } = await new ArtistRepository().get()
 </script>
