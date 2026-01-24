@@ -38,3 +38,24 @@ export const fetchStrapi = async <T>(endpoint: string, options: { headers?: Reco
   cache.set(cacheKey, response)
   return response
 }
+
+export const getStrapiImageUrl = (image: Record<string, any> | null | undefined): string | null => {
+  if (!image) return null
+
+  const config = useRuntimeConfig()
+  const strapiBaseUrl = config.public.strapiUrl
+
+  // Handle Strapi v4 format: { data: { attributes: { url: '...' } } }
+  if (image.data?.attributes?.url) {
+    const url = image.data.attributes.url
+    return url.startsWith('http') ? url : `${strapiBaseUrl}${url}`
+  }
+
+  // Handle direct url format: { url: '...' }
+  if (image.url) {
+    const url = image.url
+    return url.startsWith('http') ? url : `${strapiBaseUrl}${url}`
+  }
+
+  return null
+}
