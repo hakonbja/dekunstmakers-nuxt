@@ -15,10 +15,10 @@
 
 <script setup lang="ts">
   import { getStrapiImageUrl } from '~~/utils/strapi'
-import { ArtistRepository } from '~~/utils/artistRepository'
+  import { useArtistBySlug } from '~~/utils/artistRepository'
 
   const route = useRoute()
-  const artist = await new ArtistRepository().getBySlug(route.params.artist as string)
+  const artist = await useArtistBySlug(route.params.artist as string)
 
   const artPiecesByYear = computed(() => {
     return artist.art_pieces?.reduce((acc: Record<string, any[]>, piece) => {

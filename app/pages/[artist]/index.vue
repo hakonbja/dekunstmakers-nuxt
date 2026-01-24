@@ -9,11 +9,11 @@
   </template>
   
   <script setup lang="ts">
-    import { ArtistRepository } from '~~/utils/artistRepository'
+    import { useArtistBySlug } from '~~/utils/artistRepository'
     import { getStrapiImageUrl } from '~~/utils/strapi'
   
     const route = useRoute()
-    const artist = await new ArtistRepository().getBySlug(route.params.artist as string)
+    const artist = await useArtistBySlug(route.params.artist as string)
     
     const coverImageUrl = computed(() => getStrapiImageUrl(artist.biographyImage))
   </script>

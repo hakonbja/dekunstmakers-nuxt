@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ArtistRepository } from '../../utils/artistRepository'
+  import { useArtists } from '~~/utils/artistRepository'
 
   interface Artist {
     id: number
@@ -37,5 +37,5 @@
     art_pieces?: any[]
   }
   
-  const { data: artists, pending, error } = await new ArtistRepository().get()
+  const { data: artists, pending, error } = await useArtists()
 </script>
