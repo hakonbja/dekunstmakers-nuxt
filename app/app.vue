@@ -29,7 +29,10 @@ body {
   display: flex;
   flex-direction: column;
   margin: unset;
+  height: 100vh;
   font-family: var(--font-sans);
+  color: var(--color-text);
+  background-color: var(--color-background);
 }
 
 main {
@@ -65,7 +68,7 @@ h6 {
     font-size: 20px;
 }
 
-p {
+p, .paragraph {
     font-size: 16px;
     font-weight: 400;
     line-height: 1.25;
