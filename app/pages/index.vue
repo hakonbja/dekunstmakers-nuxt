@@ -6,6 +6,7 @@
       <div v-if="pending">Loading artists...</div>
       <div v-else-if="error" class="error">
         Error loading artists: {{ error }}
+        <pre v-if="error">{{ JSON.stringify(error, null, 2) }}</pre>
       </div>
       <div v-else-if="artists && artists.length > 0" class="artists-list">
         <div v-for="artist in artists" :key="artist.id" class="artist-card">
@@ -26,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-  import { ArtistRepository } from '../../utils/artistRepository'
+  import { useArtists } from '~~/utils/artistRepository'
 
   interface Artist {
     id: number
@@ -37,5 +38,5 @@
     art_pieces?: any[]
   }
   
-  const { data: artists, pending, error } = await new ArtistRepository().get()
+  const { data: artists, pending, error } = await useArtists()
 </script>
