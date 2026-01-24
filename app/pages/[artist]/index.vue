@@ -4,7 +4,6 @@
       <h2>{{ artist.title }}</h2>
       <img v-if="coverImageUrl" :src="coverImageUrl" :alt="artist.biographyImage.alternativeText" />
       <NuxtLink :to="`/${artist.slug}/collectie`">Collectie bekijken</NuxtLink>
-      <pre>{{ artist }}</pre>
     </div>
   </template>
   
