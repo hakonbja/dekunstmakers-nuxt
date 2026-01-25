@@ -25,9 +25,10 @@
     --font-size-h4: 24px;
     --font-size-h5: 20px;
     --font-size-h6: 18px;
-    --font-size-p: 16px;
+    --font-size-p: 14px;
 
     --container-padding: 16px;
+    --grid-column-gap: 24px;
 
     @include media-query.up(sm) {
         --font-size-h1: 48px;

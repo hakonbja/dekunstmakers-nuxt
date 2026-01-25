@@ -17,14 +17,14 @@ const { data: artists } = await useArtists()
 
 .hero-title {
     grid-column: span 12;
-    margin-bottom: 28px;
+    margin-block: 12px 28px;
     text-align: center;
     font-size: 30px;
     font-weight: 600;
     line-height: 1.25;
     
     @include media-query.up(sm) {
-        margin-bottom: 40px;
+        margin-block: 40px;
         font-size: 40px;
     }
 }

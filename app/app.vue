@@ -36,10 +36,10 @@
         flex-grow: 1;
         align-content: start;
         width: min(calc(100vw - var(--container-padding) * 2), 1224px);
-        padding-block: 12px 16px;
+        padding-block-end: 16px;
         
         @include media-query.up(sm) {
-            padding-block: 40px;
+            padding-block-end: 40px;
         }
     }
 </style>
