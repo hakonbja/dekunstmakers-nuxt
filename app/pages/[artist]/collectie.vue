@@ -1,12 +1,14 @@
 <template>
-    <div>
-        <h1>Collectie</h1>
-        <h2>{{ artist.firstName }} {{ artist.lastName }}</h2>
-        <div v-if="artPieces && artPieces.length > 0">
-            <div v-for="{ year, pieces } in artPiecesByYear" :key="year">
+    <PageHeading
+        title="Collectie"
+        :subtitle="artist.firstName + ' ' + artist.lastName"
+    />
+    <div class="collection">
+        <div class="collection__content" v-if="artPieces && artPieces.length > 0">
+            <div v-for="{ year, pieces } in artPiecesByYear" :key="year" class="collection__year">
                 <h3>{{ year }}</h3>
-                <div v-for="piece in pieces" :key="piece.id">
-                    <img v-if="pieceImageUrl(piece)" :src="pieceImageUrl(piece)" :alt="(piece.images || piece.image)?.alternativeText || ''" />
+                <div v-for="piece in pieces" :key="piece.id" class="collection__art-piece">
+                    <img v-if="pieceImageUrl(piece)" class="collection__art-piece-image" :src="pieceImageUrl(piece)" :alt="(piece.images || piece.image)?.alternativeText || ''" />
                 </div>
             </div>
         </div>
@@ -70,3 +72,25 @@
             .sort((a, b) => parseInt(b.year) - parseInt(a.year))
     })
 </script>
+
+<style lang="scss" scoped>
+@use '../../styles/mixins/media-query';
+
+.collection {
+    grid-column: 1 / -1;
+
+    &__art-piece {
+        width: 100%;
+    }
+
+    @include media-query.up(sm) {
+        &__art-piece {
+            width: 50%;
+        }
+    }
+
+    &__art-piece-image {
+        width: 100%;
+    }
+}
+</style>

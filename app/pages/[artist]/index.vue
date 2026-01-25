@@ -1,9 +1,9 @@
 <template>
+    <PageHeading
+        :title="artist.firstName + ' ' + artist.lastName"
+        :subtitle="artist.title"
+    />
     <div class="artist-details">
-        <PageHeading
-            :title="artist.firstName + ' ' + artist.lastName"
-            :subtitle="artist.title"
-        />
         <div class="artist-details__content">
             <img v-if="coverImageUrl" class="artist-details__cover-image" :src="coverImageUrl" :alt="artist.biographyImage.alternativeText" />
             <div class="artist-details__bio" v-html="formattedBiography"></div>
