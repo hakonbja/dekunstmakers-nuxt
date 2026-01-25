@@ -1,0 +1,52 @@
+<template>
+    <div class="artist-card">
+        <img v-if="coverImageUrl" :src="coverImageUrl" :alt="artist.biographyImage.alternativeText" />
+        <div class="artist-card__content">
+            <h2 class="artist-card__name h4">{{ artist.firstName }} {{ artist.lastName }}</h2>
+            <p class="artist-card__title">{{ artist.title }}</p>
+            <p class="artist-card__intro">{{ artist.intro }}</p>
+            <div class="artist-card__buttons">
+                <NuxtLink :to="`/${artist.slug}/collectie`" class="button">Collectie bekijken</NuxtLink>
+                <NuxtLink :to="`/${artist.slug}`" class="button button--secondary">Over {{artist.firstName}}</NuxtLink>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script setup lang="ts">
+import type { Artist } from '~~/utils/artistRepository';
+import { getStrapiImageUrl } from '~~/utils/strapi';
+
+const props = defineProps<{
+    artist: Artist;
+}>();
+
+const coverImageUrl = computed(() => getStrapiImageUrl(props.artist.biographyImage));
+</script>
+
+<style lang="scss" scoped>
+.artist-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        padding: 12px 16px;
+        border: 1px solid var(--color-accent);
+    }
+
+    &__title {
+        margin-bottom: 8px;
+        color: var(--color-gray);
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+}
+
+</style>

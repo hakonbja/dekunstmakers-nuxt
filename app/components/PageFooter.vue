@@ -13,6 +13,7 @@
 
 <style lang="scss" scoped>
 footer {
+  width: calc(100% - 64px);
   display: flex;
   justify-content: space-between;
   align-items: center;
