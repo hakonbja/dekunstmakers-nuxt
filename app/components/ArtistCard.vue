@@ -1,6 +1,6 @@
 <template>
     <div class="artist-card">
-        <img v-if="coverImageUrl" :src="coverImageUrl" :alt="artist.coverImage?.alternativeText" />
+        <img v-if="coverImageUrl" class="artist-card__cover-image" :src="coverImageUrl" :alt="artist.coverImage?.alternativeText" />
         <div class="artist-card__content">
             <h2 class="artist-card__name h4">{{ artist.firstName }} {{ artist.lastName }}</h2>
             <p class="artist-card__title">{{ artist.title }}</p>
@@ -35,6 +35,12 @@ const coverImageUrl = computed(() => getStrapiImageUrl(props.artist.coverImage))
     
     @include media-query.up(md) {
         grid-column: span 6;
+    }
+
+    &__cover-image {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
     }
 
     &__content {
