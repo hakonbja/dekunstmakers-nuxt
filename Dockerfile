@@ -1,6 +1,9 @@
 # Build stage
 FROM node:20-alpine AS builder
 
+# Pin npm to match local version
+RUN npm install -g npm@11.6.2
+
 WORKDIR /app
 
 # Copy package files
