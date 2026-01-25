@@ -13,7 +13,8 @@ import PageFooter from './components/PageFooter.vue'
 </script>
 
 <style lang="scss">
-@import './styles/reset.css';
+@use './styles/reset.css';
+@import './styles/mixins.scss';
 
 :root {
     --color-white: #FAFAF8;
@@ -47,8 +48,10 @@ body {
 }
 
 main {
+  @include grid(12);
   flex-grow: 1;
-  width: min(calc(100vw - 64px), 1200px);
+  align-content: start;
+  width: min(calc(100vw - 64px), 1224px);
   padding-block: 40px;
 }
 

@@ -12,7 +12,10 @@ const { data: artists } = await useArtists()
 </script>
 
 <style lang="scss" scoped>
+@import '../styles/mixins.scss';
+
 .hero-title {
+    grid-column: span 12;
     margin-bottom: 40px;
     text-align: center;
     font-size: 40px;
@@ -21,8 +24,8 @@ const { data: artists } = await useArtists()
 }
 
 .artist-cards {
-    display: flex;
-    flex-direction: row;
-    gap: 24px;
+    @include grid(8);
+    grid-column: 3 / span 8;
+    align-content: stretch;
 }
 </style>

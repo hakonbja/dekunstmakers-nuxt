@@ -26,6 +26,7 @@ const coverImageUrl = computed(() => getStrapiImageUrl(props.artist.biographyIma
 
 <style lang="scss" scoped>
 .artist-card {
+    grid-column: span 4;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -33,6 +34,7 @@ const coverImageUrl = computed(() => getStrapiImageUrl(props.artist.biographyIma
     &__content {
         display: flex;
         flex-direction: column;
+        flex-grow: 1;
         padding: 12px 16px;
         border: 1px solid var(--color-accent);
     }
@@ -42,10 +44,14 @@ const coverImageUrl = computed(() => getStrapiImageUrl(props.artist.biographyIma
         color: var(--color-gray);
     }
 
+    &__intro {
+        margin-bottom: 20px;
+    }
+
     &__buttons {
         display: flex;
         justify-content: space-between;
-        margin-top: 20px;
+        margin-top: auto;
     }
 }
 
