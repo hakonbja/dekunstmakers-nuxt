@@ -1,0 +1,40 @@
+.button {
+    display: inline-block;
+    padding: 8px 12px;
+    text-align: center;
+    color: var(--color-on-cta);
+    background-color: var(--color-cta);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.6;
+    text-decoration: none;
+    border: 2px solid var(--color-cta);
+    
+    &--secondary {
+        color: var(--color-cta);
+        background-color: var(--color-white);
+        border-color: var(--color-cta);
+    }
+    
+    &--tertiary {
+        position: relative;
+        padding-inline: 0;
+        color: var(--color-cta);
+        background-color: transparent;
+        border: none;
+    
+        &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 8px;
+            height: 1px;
+            background-color: var(--color-cta);
+        }
+    }
+
+    & + & {
+        margin-left: 8px;
+    }
+}
