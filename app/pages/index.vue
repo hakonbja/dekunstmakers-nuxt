@@ -12,20 +12,31 @@ const { data: artists } = await useArtists()
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/mixins.scss';
+@use '../styles/mixins/display';
+@use '../styles/mixins/media-query';
 
 .hero-title {
     grid-column: span 12;
-    margin-bottom: 40px;
+    margin-block: 12px 28px;
     text-align: center;
-    font-size: 40px;
+    font-size: 30px;
     font-weight: 600;
     line-height: 1.25;
+    
+    @include media-query.up(sm) {
+        margin-block: 40px;
+        font-size: 40px;
+    }
 }
 
 .artist-cards {
-    @include grid(8);
-    grid-column: 3 / span 8;
+    @include display.grid(12);
+    grid-column: span 12;
+    row-gap: 32px;
     align-content: stretch;
+
+    @include media-query.up(lg) {
+        grid-column: 2 / -2;
+    }
 }
 </style>

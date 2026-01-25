@@ -1,6 +1,6 @@
 <template>
     <div class="artist-card">
-        <img v-if="coverImageUrl" :src="coverImageUrl" :alt="artist.biographyImage.alternativeText" />
+        <img v-if="coverImageUrl" class="artist-card__cover-image" :src="coverImageUrl" :alt="artist.coverImage?.alternativeText" />
         <div class="artist-card__content">
             <h2 class="artist-card__name h4">{{ artist.firstName }} {{ artist.lastName }}</h2>
             <p class="artist-card__title">{{ artist.title }}</p>
@@ -21,15 +21,27 @@ const props = defineProps<{
     artist: Artist;
 }>();
 
-const coverImageUrl = computed(() => getStrapiImageUrl(props.artist.biographyImage));
+const coverImageUrl = computed(() => getStrapiImageUrl(props.artist.coverImage));
 </script>
 
 <style lang="scss" scoped>
+@use '../styles/mixins/media-query';
+
 .artist-card {
-    grid-column: span 4;
+    grid-column: span 12;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    
+    @include media-query.up(md) {
+        grid-column: span 6;
+    }
+
+    &__cover-image {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+    }
 
     &__content {
         display: flex;
@@ -54,5 +66,4 @@ const coverImageUrl = computed(() => getStrapiImageUrl(props.artist.biographyIma
         margin-top: auto;
     }
 }
-
 </style>

@@ -1,0 +1,45 @@
+@use './mixins/media-query.scss' as media-query;
+
+:root {
+    --color-white: #FAFAF8;
+    --color-green: #5A766F;
+    --color-black: #333333;
+    --color-gray: #777777;
+    --color-beige: #E8E2D8;
+    --color-beige-dark: #CCBFA8;
+
+    --color-text: var(--color-black);
+    --color-text-muted: var(--color-gray);
+    --color-background: var(--color-white);
+    --color-cta: var(--color-green);
+    --color-accent: var(--color-beige);
+    --color-accent-dark: var(--color-beige-dark);
+    --color-on-cta: var(--color-white);
+
+    --font-sans: 'Inter', sans-serif;
+    --font-serif: 'Playfair Display', serif;
+
+    --font-size-h1: 36px;
+    --font-size-h2: 30px;
+    --font-size-h3: 26px;
+    --font-size-h4: 24px;
+    --font-size-h5: 20px;
+    --font-size-h6: 18px;
+    --font-size-p: 14px;
+
+    --container-padding: 16px;
+    --grid-column-gap: 24px;
+
+    @include media-query.up(sm) {
+        --font-size-h1: 48px;
+        --font-size-h2: 40px;
+        --font-size-h3: 32px;
+        --font-size-h4: 28px;
+        --font-size-h5: 24px;
+        --font-size-h6: 20px;
+        --font-size-p: 16px;
+    
+        --container-padding: 32px;
+    }
+}
+
