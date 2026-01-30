@@ -5,10 +5,10 @@
     />
     <div class="artist-details">
         <div class="artist-details__content">
-            <img v-if="coverImageUrl" class="artist-details__cover-image" :src="coverImageUrl" :alt="artist.biographyImage.alternativeText" />
+            <img v-if="bioImageUrl" class="artist-details__cover-image" :src="bioImageUrl" :alt="artist.biographyImage.alternativeText" />
             <div class="artist-details__bio" v-html="formattedBiography"></div>
         </div>
-        <NuxtLink :to="`/${artist.slug}/collectie`" class="artist-details__button button">Collectie bekijken</NuxtLink>
+        <NuxtLink :to="`/${artist.slug}/collectie`" class="artist-details__button button"><span class="button__text">Collectie bekijken</span></NuxtLink>
     </div>
 </template>
 
@@ -20,7 +20,7 @@
     const route = useRoute()
     const artist = await useArtistBySlug(route.params.artist as string)
 
-    const coverImageUrl = computed(() => getStrapiImageUrl(artist.biographyImage))
+    const bioImageUrl = computed(() => getStrapiImageUrl(artist.biographyImage))
     const formattedBiography = computed(() => markdownToHtml(artist.biography));
 </script>
 

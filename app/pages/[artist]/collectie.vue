@@ -8,7 +8,9 @@
             <div v-for="{ year, pieces } in artPiecesByYear" :key="year" class="collection__year">
                 <h3>{{ year }}</h3>
                 <div v-for="piece in pieces" :key="piece.id" class="collection__art-piece">
-                    <img v-if="pieceImageUrl(piece)" class="collection__art-piece-image" :src="pieceImageUrl(piece)" :alt="(piece.images || piece.image)?.alternativeText || ''" />
+                    <NuxtLink v-if="pieceImageUrl(piece)" :to="`/${artist.slug}/${piece.slug}`">
+                        <img class="collection__art-piece-image" :src="pieceImageUrl(piece)" :alt="(piece.images || piece.image)?.alternativeText || ''" />
+                    </NuxtLink>
                 </div>
             </div>
         </div>

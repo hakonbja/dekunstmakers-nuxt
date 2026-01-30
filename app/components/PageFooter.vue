@@ -1,10 +1,10 @@
 <template>
     <footer>
         <div class="left">
-            <p class="small">© 2026</p>
+            <p class="small muted">© 2026</p>
         </div>
         <div class="right">
-            <p class="small">
+            <p class="small muted">
                 Made by <a href="mailto:hakonbja@gmail.com" target="_blank" class="small">Hákon</a>
             </p>
         </div>
@@ -18,6 +18,7 @@ footer {
     justify-content: space-between;
     align-items: center;
     padding: 16px 32px;
+    color: var(--color-text-muted);
     border-top: 2px solid var(--color-accent);
 
     p {
@@ -26,11 +27,11 @@ footer {
 
     a {
         text-decoration: none;
-        color: var(--color-text);
+        color: inherit;
         transition: color 0.2s ease;
 
         &:hover {
-            color: var(--color-text-muted);
+            color: var(--color-text);
         }
     }
 }
