@@ -42,4 +42,10 @@
             padding-block-end: 40px;
         }
     }
+
+    .hr {
+        height: 1px;
+        width: 100%;
+        background-color: var(--color-accent);
+    }
 </style>
