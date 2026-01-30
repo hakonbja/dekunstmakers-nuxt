@@ -21,7 +21,7 @@
                 <div class="hr"></div>
                 <p v-if="artPiece.size" class="art-piece-details__size"><span class="art-piece-details__meta-label">Afmetingen:</span> {{ artPiece.size }}</p>
                 <p v-if="artPiece.technology" class="art-piece-details__technology"><span class="art-piece-details__meta-label">Techniek:</span> {{ artPiece.technology }}</p>
-                <p v-if="artPiece.date" class="art-piece-details__date"><span class="art-piece-details__meta-label">Datum:</span> {{ artPiece.date }}</p>
+                <p v-if="artPiece.date" class="art-piece-details__date"><span class="art-piece-details__meta-label">Datum:</span> <NuxtTime :datetime="artPiece.date" locale="nl-NL" /></p>
                 <div class="art-piece-details__meta-buttons">
                     <a :href="`mailto:${artist.email}`" class="button button--primary">Contact opnemen</a>
                     <NuxtLink :to="`/${artist.slug}/collectie`" class="button button--secondary">Naar collectie</NuxtLink>
