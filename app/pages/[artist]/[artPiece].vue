@@ -28,8 +28,18 @@
                 </div>
             </div>
             <div class="art-piece-details__navigation">
-                <NuxtLink v-if="previousArtPiece" :to="previousArtPiece" class="button button--tertiary art-piece-details__navigation-previous">Previous</NuxtLink>
-                <NuxtLink v-if="nextArtPiece" :to="nextArtPiece" class="button button--tertiary art-piece-details__navigation-next">Next</NuxtLink>
+                <NuxtLink v-if="previousArtPiece" :to="previousArtPiece" class="button button--tertiary art-piece-details__navigation-button art-piece-details__navigation-button--previous">
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M8.5 1L4 5.5L8.5 10" stroke="#121923" stroke-width="1.2"/>
+                    </svg>
+                    Vorige
+                </NuxtLink>
+                <NuxtLink v-if="nextArtPiece" :to="nextArtPiece" class="button button--tertiary art-piece-details__navigation-button art-piece-details__navigation-button--next">
+                    Volgende
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M4 1L8.5 5.5L4 10" stroke="#121923" stroke-width="1.2"/>
+                    </svg>
+                </NuxtLink>
             </div>
         </div>
     </div>
@@ -101,11 +111,11 @@ const imageSizes = computed(() => {
     &__image-container {
         grid-column: span 12;
     
-        @include media-query.up(md) {
+        @include media-query.up(lg) {
             grid-column: span 7;
         }
 
-        @include media-query.up(lg) {
+        @include media-query.up(xl) {
             grid-column: span 8;
         }
     }
@@ -121,12 +131,12 @@ const imageSizes = computed(() => {
         display: flex;
         flex-direction: column;
         row-gap: 16px;
-    
-        @include media-query.up(md) {
+
+        @include media-query.up(lg) {
             grid-column: span 5;
         }
 
-        @include media-query.up(lg) {
+        @include media-query.up(xl) {
             grid-column: span 4;
         }
     }
@@ -139,14 +149,16 @@ const imageSizes = computed(() => {
         border: 1px solid var(--color-accent);
     }
 
-    &__meta-buttons {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
     &__meta-label {
         color: var(--color-gray);
+    }
+
+    &__meta-buttons {
+        display: flex;
+        gap: 8px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
     }
 
     &__navigation {
@@ -154,11 +166,17 @@ const imageSizes = computed(() => {
         justify-content: space-between;
     }
 
-    &__navigation-previous {
+    &__navigation-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    &__navigation-button--previous {
         margin-right: auto;
     }
 
-    &__navigation-next {
+    &__navigation-button--next {
         margin-left: auto;
     }
 }

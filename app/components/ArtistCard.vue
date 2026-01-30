@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Artist } from '~~/utils/artistRepository';
+import type { Artist } from '~~/types/Artist';
 import { getStrapiImageUrl } from '~~/utils/strapi';
 
 const props = defineProps<{
@@ -62,8 +62,10 @@ const coverImageUrl = computed(() => getStrapiImageUrl(props.artist.coverImage))
 
     &__buttons {
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
         margin-top: auto;
+        gap: 8px;
     }
 }
 </style>
