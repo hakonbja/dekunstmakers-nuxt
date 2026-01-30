@@ -6,7 +6,7 @@
             <p class="artist-card__title">{{ artist.title }}</p>
             <p class="artist-card__intro">{{ artist.intro }}</p>
             <div class="artist-card__buttons">
-                <NuxtLink :to="`/${artist.slug}/collectie`" class="button">Collectie bekijken</NuxtLink>
+                <NuxtLink :to="`/${artist.slug}/collectie`" class="button"><span class="button__text">Collectie bekijken</span></NuxtLink>
                 <NuxtLink :to="`/${artist.slug}`" class="button button--secondary">Over {{artist.firstName}}</NuxtLink>
             </div>
         </div>

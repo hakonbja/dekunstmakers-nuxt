@@ -8,7 +8,7 @@
             <img v-if="bioImageUrl" class="artist-details__cover-image" :src="bioImageUrl" :alt="artist.biographyImage.alternativeText" />
             <div class="artist-details__bio" v-html="formattedBiography"></div>
         </div>
-        <NuxtLink :to="`/${artist.slug}/collectie`" class="artist-details__button button">Collectie bekijken</NuxtLink>
+        <NuxtLink :to="`/${artist.slug}/collectie`" class="artist-details__button button"><span class="button__text">Collectie bekijken</span></NuxtLink>
     </div>
 </template>
 

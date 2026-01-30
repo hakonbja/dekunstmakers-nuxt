@@ -32,10 +32,10 @@
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path d="M8.5 1L4 5.5L8.5 10" stroke="#121923" stroke-width="1.2"/>
                     </svg>
-                    Vorige
+                    <span class="button__text">Vorige</span>
                 </NuxtLink>
                 <NuxtLink v-if="nextArtPiece" :to="nextArtPiece" class="button button--tertiary art-piece-details__navigation-button art-piece-details__navigation-button--next">
-                    Volgende
+                    <span class="button__text">Volgende</span>
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path d="M4 1L8.5 5.5L4 10" stroke="#121923" stroke-width="1.2"/>
                     </svg>

@@ -22,15 +22,19 @@
         color: var(--color-cta);
         background-color: transparent;
         border: none;
-    
-        &::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 8px;
-            height: 1px;
-            background-color: var(--color-cta);
+
+        .button__text {
+            position: relative;
+
+            &::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                height: 1px;
+                background-color: var(--color-cta);
+            }
         }
     }
 }
