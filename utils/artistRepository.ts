@@ -14,6 +14,10 @@ export interface Artist {
     art_pieces?: any[];
 }
 
+export function sortArtists(artists: Artist[]): Artist[] {
+    return artists.sort((a, b) => a.firstName.localeCompare(b.firstName));
+}
+
 export const useArtists = () => {
     return useAsyncData<Artist[]>(
         'artists',
@@ -46,7 +50,8 @@ export const useArtists = () => {
                     } as any
                 )
                 
-                return response.data?.map((item) => ('attributes' in item ? item.attributes : item) as Artist) || []
+                const artists = response.data?.map((item) => ('attributes' in item ? item.attributes : item) as Artist) || []
+                return sortArtists(artists)
             } catch (error: any) {
                 console.error('Error fetching artists:', error)
                 console.error('Error message:', error?.message)
@@ -61,8 +66,14 @@ export const useArtists = () => {
             server: true,
             default: () => [],
             getCachedData: (key, nuxtApp) => {
-                // Return cached data from payload if it exists
-                return nuxtApp.payload.data[key] || nuxtApp.static.data[key]
+                const cached = nuxtApp.payload.data[key] || nuxtApp.static.data[key];
+
+                if (cached && Array.isArray(cached) && cached.length > 0) {
+                    // Always return a new sorted array to ensure consistency
+                    return sortArtists(cached);
+                }
+                
+                return cached;
             }
         }
     )
