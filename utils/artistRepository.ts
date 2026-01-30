@@ -1,18 +1,5 @@
-import { useAsyncData, useRuntimeConfig, createError } from '#imports'
-
-export interface Artist {
-    id: number;
-    firstName: string;
-    lastName: string;
-    title: string;
-    intro: string;
-    biography: string;
-    coverImage: Record<string, any>;
-    biographyImage: Record<string, any>;
-    email: string;
-    slug: string;
-    art_pieces?: any[];
-}
+import { useAsyncData, useRuntimeConfig, createError } from '#imports';
+import type { Artist } from '~~/types/Artist';
 
 export function sortArtists(artists: Artist[]): Artist[] {
     return artists.sort((a, b) => a.firstName.localeCompare(b.firstName));
