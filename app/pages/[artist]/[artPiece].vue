@@ -28,8 +28,8 @@
                 </div>
             </div>
             <div class="art-piece-details__navigation">
-                <div class="button button--tertiary">Previous</div>
-                <div class="button button--tertiary">Next</div>
+                <NuxtLink v-if="previousArtPiece" :to="previousArtPiece" class="button button--tertiary art-piece-details__navigation-previous">Previous</NuxtLink>
+                <NuxtLink v-if="nextArtPiece" :to="nextArtPiece" class="button button--tertiary art-piece-details__navigation-next">Next</NuxtLink>
             </div>
         </div>
     </div>
@@ -37,13 +37,22 @@
 
 <script setup lang="ts">
 import { useArtistBySlug } from '~~/utils/artistRepository';
-import { useArtPieceBySlug } from '~~/utils/artPieceRepository';
+import { useArtPieceBySlug, getPreviousArtPiece, getNextArtPiece } from '~~/utils/artPieceRepository';
 import { getStrapiImageUrl } from '~~/utils/strapi';
 
 const route = useRoute();
 const artist = await useArtistBySlug(route.params.artist as string);
 const artPiece = await useArtPieceBySlug(artist, route.params.artPiece as string);
 const pieceImageUrl = computed(() => getStrapiImageUrl(artPiece.images[0]));
+
+const previousArtPiece = computed(() => {
+    const previousArtPiece = getPreviousArtPiece(artist, artPiece.slug);
+    return previousArtPiece ? `/${artist.slug}/${previousArtPiece.slug}` : null;
+});
+const nextArtPiece = computed(() => {
+    const nextArtPiece = getNextArtPiece(artist, artPiece.slug);
+    return nextArtPiece ? `/${artist.slug}/${nextArtPiece.slug}` : null;
+});
 
 const imageSrcset = computed(() => {
     if (!artPiece.images[0]?.formats) return '';
@@ -143,6 +152,14 @@ const imageSizes = computed(() => {
     &__navigation {
         display: flex;
         justify-content: space-between;
+    }
+
+    &__navigation-previous {
+        margin-right: auto;
+    }
+
+    &__navigation-next {
+        margin-left: auto;
     }
 }
 
