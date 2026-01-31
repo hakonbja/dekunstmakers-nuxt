@@ -19,7 +19,6 @@
     @use './styles/mixins/media-query';
     @use './styles/components/button';
     @use './styles/typography';
-    @use './styles/animations';
 
     body {
         display: flex;
@@ -48,9 +47,5 @@
         height: 1px;
         width: 100%;
         background-color: var(--color-accent);
-    }
-
-    :target {
-        animation: highlight 2s ease-in;
     }
 </style>
