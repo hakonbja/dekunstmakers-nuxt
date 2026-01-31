@@ -16,7 +16,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px var(--container-padding);
+    padding: 16px min(var(--container-padding), 32px);
     border-bottom: 2px solid var(--color-accent);
 }
 

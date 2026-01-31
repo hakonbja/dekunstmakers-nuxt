@@ -41,5 +41,9 @@
     
         --container-padding: 32px;
     }
+
+    @include media-query.up(lg) {
+        --container-padding: 100px;
+    }
 }
 
