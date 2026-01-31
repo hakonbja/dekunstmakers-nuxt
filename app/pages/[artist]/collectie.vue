@@ -71,7 +71,14 @@
         }, {} as Record<string, any[]>)
         
         return Object.entries(grouped)
-            .map(([year, pieces]) => ({ year, pieces }))
+            .map(([year, pieces]) => ({ 
+                year, 
+                pieces: pieces.sort((a, b) => {
+                    const dateA = a.date || ''
+                    const dateB = b.date || ''
+                    return dateB.localeCompare(dateA)
+                })
+            }))
             .sort((a, b) => parseInt(b.year) - parseInt(a.year))
     })
 </script>
