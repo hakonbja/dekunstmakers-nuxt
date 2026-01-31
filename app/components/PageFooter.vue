@@ -13,11 +13,11 @@
 
 <style lang="scss" scoped>
 footer {
-    width: calc(100% - 64px);
+    align-self: stretch;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 32px;
+    padding: 16px min(var(--container-padding), 32px);
     color: var(--color-text-muted);
     border-top: 2px solid var(--color-accent);
 

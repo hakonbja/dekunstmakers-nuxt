@@ -12,11 +12,11 @@
 
 <style lang="scss" scoped>
 header {
-    width: calc(100% - 64px);
+    align-self: stretch;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 32px;
+    padding: 16px min(var(--container-padding), 32px);
     border-bottom: 2px solid var(--color-accent);
 }
 
