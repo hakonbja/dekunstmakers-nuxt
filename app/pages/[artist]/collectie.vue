@@ -10,7 +10,7 @@
                     <h3 :id="year" class="collection__year-label h4">{{ year }}</h3>
                 </div>
                 <div class="collection__year-pieces">
-                    <div v-for="piece in pieces" :key="piece.id" class="collection__art-piece">
+                    <div v-for="piece in pieces" :key="piece.id" :id="piece.slug" class="collection__art-piece">
                         <NuxtLink v-if="pieceImageUrl(piece)" :to="`/${artist.slug}/${piece.slug}`" class="collection__art-piece-link">
                             <img class="collection__art-piece-image" :src="pieceImageUrl(piece)" :alt="(piece.images || piece.image)?.alternativeText || ''" />
                         </NuxtLink>
