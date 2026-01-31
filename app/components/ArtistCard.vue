@@ -1,5 +1,5 @@
 <template>
-    <div class="artist-card">
+    <NuxtLink :to="`/${artist.slug}/collectie`" class="artist-card">
         <img v-if="coverImageUrl" class="artist-card__cover-image" :src="coverImageUrl" :alt="artist.coverImage?.alternativeText" />
         <div class="artist-card__content">
             <h2 class="artist-card__name h4">{{ artist.firstName }} {{ artist.lastName }}</h2>
@@ -10,7 +10,7 @@
                 <NuxtLink :to="`/${artist.slug}`" class="button button--secondary">Over {{artist.firstName}}</NuxtLink>
             </div>
         </div>
-    </div>
+    </NuxtLink>
 </template>
 
 <script setup lang="ts">
@@ -32,6 +32,8 @@ const coverImageUrl = computed(() => getStrapiImageUrl(props.artist.coverImage))
     display: flex;
     flex-direction: column;
     gap: 20px;
+    text-decoration: none;
+    color: inherit;
     
     @include media-query.up(md) {
         grid-column: span 6;
