@@ -87,6 +87,6 @@ jobs:
                   script: |
                       docker load < /tmp/image.tar.gz
                       docker tag dekunstmakers:${{ steps.set_tag.outputs.tag }} dekunstmakers:latest
-                      cd /root/dekunstmakers-infra
+                      cd /root/dekunstmakers
                       docker-compose up -d frontend
                       docker image prune -f
