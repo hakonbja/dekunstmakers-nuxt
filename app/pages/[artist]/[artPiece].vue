@@ -11,9 +11,19 @@
                 :src="pieceImageUrl" 
                 :srcset="imageSrcset"
                 :sizes="imageSizes"
-                :alt="artPiece.images[0]?.alternativeText || ''" 
+                :alt="artPiece.images[0]?.alternativeText || ''"
+                @click="openLightbox"
+                role="button"
+                tabindex="0"
+                @keydown.enter="openLightbox"
+                @keydown.space.prevent="openLightbox"
             />
         </div>
+        <ImageLightbox 
+            :is-open="isLightboxOpen"
+            :image="artPiece.images[0] || null"
+            @close="closeLightbox"
+        />
 
         <div class="art-piece-details__content">
             <div class="art-piece-details__meta">
@@ -97,6 +107,16 @@ const imageSizes = computed(() => {
     return '(max-width: 575px) 100vw, (max-width: 767px) 100vw, (max-width: 991px) 100vw, (max-width: 1199px) 100vw, 1224px';
 });
 
+const isLightboxOpen = ref(false);
+
+const openLightbox = () => {
+    isLightboxOpen.value = true;
+};
+
+const closeLightbox = () => {
+    isLightboxOpen.value = false;
+};
+
 </script>
 
 <style lang="scss" scoped>
@@ -123,6 +143,17 @@ const imageSizes = computed(() => {
     &__image {
         width: 100%;
         height: auto;
+        cursor: pointer;
+        transition: opacity 0.2s;
+
+        &:hover {
+            opacity: 0.9;
+        }
+
+        &:focus {
+            outline: 2px solid var(--color-accent);
+            outline-offset: 2px;
+        }
     }
 
     &__content {
