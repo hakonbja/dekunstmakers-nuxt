@@ -66,30 +66,30 @@ const nextArtPiece = computed(() => {
 
 const imageSrcset = computed(() => {
     if (!artPiece.images[0]?.formats) return '';
-    
+
     const srcsetParts: string[] = [];
     const formats = artPiece.images[0].formats;
-    
+
     if (formats.thumbnail) {
         const url = useStrapiMedia(formats.thumbnail.url);
         srcsetParts.push(`${url} ${formats.thumbnail.width}w`);
     }
-    
+
     if (formats.small) {
         const url = useStrapiMedia(formats.small.url);
         srcsetParts.push(`${url} ${formats.small.width}w`);
     }
-    
+
     if (formats.medium) {
         const url = useStrapiMedia(formats.medium.url);
         srcsetParts.push(`${url} ${formats.medium.width}w`);
     }
-    
+
     if (formats.large) {
         const url = useStrapiMedia(formats.large.url);
         srcsetParts.push(`${url} ${formats.large.width}w`);
     }
-    
+
     return srcsetParts.join(', ');
 });
 
@@ -110,7 +110,7 @@ const imageSizes = computed(() => {
 
     &__image-container {
         grid-column: span 12;
-    
+
         @include media-query.up(lg) {
             grid-column: span 7;
         }
