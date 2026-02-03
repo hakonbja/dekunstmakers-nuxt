@@ -19,6 +19,7 @@
     @use './styles/mixins/media-query';
     @use './styles/components/button';
     @use './styles/typography';
+    @use './styles/spacing';
 
     body {
         display: flex;
@@ -45,6 +46,7 @@
 
     .hr {
         height: 1px;
+        grid-column: 1 / -1;
         width: 100%;
         background-color: var(--color-accent);
     }

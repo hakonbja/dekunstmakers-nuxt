@@ -49,7 +49,7 @@
         
         if (!images) return undefined
         
-        const url = getStrapiImageUrl(images)
+        const url = getStrapiImageUrl(images, 'small')
         return url ?? undefined
     }
 

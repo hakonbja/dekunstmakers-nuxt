@@ -1,0 +1,65 @@
+// Spacing utility classes
+// Margin and padding utilities where the number is multiplied by the step size
+// Example: mt-2 = margin-top: 8px (when $spacing-step is 4px)
+
+$spacing-step: 4px;
+
+@for $i from 0 through 20 {
+    // Margin utilities
+    .mt-#{$i} {
+        margin-top: #{$i * $spacing-step};
+    }
+    
+    .mr-#{$i} {
+        margin-right: #{$i * $spacing-step};
+    }
+    
+    .mb-#{$i} {
+        margin-bottom: #{$i * $spacing-step};
+    }
+    
+    .ml-#{$i} {
+        margin-left: #{$i * $spacing-step};
+    }
+    
+    // Margin x-axis (horizontal)
+    .mx-#{$i} {
+        margin-left: #{$i * $spacing-step};
+        margin-right: #{$i * $spacing-step};
+    }
+    
+    // Margin y-axis (vertical)
+    .my-#{$i} {
+        margin-top: #{$i * $spacing-step};
+        margin-bottom: #{$i * $spacing-step};
+    }
+    
+    // Padding utilities
+    .pt-#{$i} {
+        padding-top: #{$i * $spacing-step};
+    }
+    
+    .pr-#{$i} {
+        padding-right: #{$i * $spacing-step};
+    }
+    
+    .pb-#{$i} {
+        padding-bottom: #{$i * $spacing-step};
+    }
+    
+    .pl-#{$i} {
+        padding-left: #{$i * $spacing-step};
+    }
+    
+    // Padding x-axis (horizontal)
+    .px-#{$i} {
+        padding-left: #{$i * $spacing-step};
+        padding-right: #{$i * $spacing-step};
+    }
+    
+    // Padding y-axis (vertical)
+    .py-#{$i} {
+        padding-top: #{$i * $spacing-step};
+        padding-bottom: #{$i * $spacing-step};
+    }
+}

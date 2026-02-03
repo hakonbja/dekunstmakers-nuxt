@@ -21,7 +21,7 @@ const props = defineProps<{
     artist: Artist;
 }>();
 
-const coverImageUrl = computed(() => getStrapiImageUrl(props.artist.coverImage));
+const coverImageUrl = computed(() => getStrapiImageUrl(props.artist.coverImage, 'small'));
 </script>
 
 <style lang="scss" scoped>

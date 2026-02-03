@@ -11,17 +11,27 @@
                 :src="pieceImageUrl" 
                 :srcset="imageSrcset"
                 :sizes="imageSizes"
-                :alt="artPiece.images[0]?.alternativeText || ''" 
+                :alt="artPiece.images[0]?.alternativeText || ''"
+                @click="openLightbox"
+                role="button"
+                tabindex="0"
+                @keydown.enter="openLightbox"
+                @keydown.space.prevent="openLightbox"
             />
         </div>
+        <ImageLightbox 
+            :is-open="isLightboxOpen"
+            :image="artPiece.images[0] || null"
+            @close="closeLightbox"
+        />
 
         <div class="art-piece-details__content">
             <div class="art-piece-details__meta">
                 <p class="art-piece-details__description">{{ artPiece.description }}</p>
                 <div class="hr"></div>
-                <p v-if="artPiece.size" class="art-piece-details__size"><span class="art-piece-details__meta-label">Afmetingen:</span> {{ artPiece.size }}</p>
-                <p v-if="artPiece.technology" class="art-piece-details__technology"><span class="art-piece-details__meta-label">Techniek:</span> {{ artPiece.technology }}</p>
-                <p v-if="artPiece.date" class="art-piece-details__date"><span class="art-piece-details__meta-label">Datum:</span> <NuxtTime :datetime="artPiece.date" locale="nl-NL" /></p>
+                <p v-if="artPiece.size"><span class="art-piece-details__meta-label">Afmetingen:</span> {{ artPiece.size }}</p>
+                <p v-if="artPiece.technology"><span class="art-piece-details__meta-label">Techniek:</span> {{ artPiece.technology }}</p>
+                <p v-if="artPiece.date"><span class="art-piece-details__meta-label">Datum:</span> {{ formattedDate }}</p>
                 <div class="art-piece-details__meta-buttons">
                     <a :href="`mailto:${artist.email}`" class="button button--primary">Contact opnemen</a>
                     <NuxtLink :to="`/${artist.slug}/collectie#${artPiece.slug}`" class="button button--secondary">Bekijk in collectie</NuxtLink>
@@ -66,35 +76,52 @@ const nextArtPiece = computed(() => {
 
 const imageSrcset = computed(() => {
     if (!artPiece.images[0]?.formats) return '';
-    
+
     const srcsetParts: string[] = [];
     const formats = artPiece.images[0].formats;
-    
+
     if (formats.thumbnail) {
         const url = useStrapiMedia(formats.thumbnail.url);
         srcsetParts.push(`${url} ${formats.thumbnail.width}w`);
     }
-    
+
     if (formats.small) {
         const url = useStrapiMedia(formats.small.url);
         srcsetParts.push(`${url} ${formats.small.width}w`);
     }
-    
+
     if (formats.medium) {
         const url = useStrapiMedia(formats.medium.url);
         srcsetParts.push(`${url} ${formats.medium.width}w`);
     }
-    
+
     if (formats.large) {
         const url = useStrapiMedia(formats.large.url);
         srcsetParts.push(`${url} ${formats.large.width}w`);
     }
-    
+
     return srcsetParts.join(', ');
 });
 
 const imageSizes = computed(() => {
     return '(max-width: 575px) 100vw, (max-width: 767px) 100vw, (max-width: 991px) 100vw, (max-width: 1199px) 100vw, 1224px';
+});
+
+const isLightboxOpen = ref(false);
+
+const openLightbox = () => {
+    isLightboxOpen.value = true;
+};
+
+const closeLightbox = () => {
+    isLightboxOpen.value = false;
+};
+
+const formattedDate = computed(() => {
+    if (!artPiece.date) return '';
+    const date = new Date(artPiece.date);
+    const formatted = new Intl.DateTimeFormat('nl-NL', { month: 'long', year: 'numeric' }).format(date);
+    return formatted.charAt(0).toUpperCase() + formatted.slice(1);
 });
 
 </script>
@@ -110,7 +137,7 @@ const imageSizes = computed(() => {
 
     &__image-container {
         grid-column: span 12;
-    
+
         @include media-query.up(lg) {
             grid-column: span 7;
         }
@@ -123,6 +150,17 @@ const imageSizes = computed(() => {
     &__image {
         width: 100%;
         height: auto;
+        cursor: pointer;
+        transition: opacity 0.2s;
+
+        &:hover {
+            opacity: 0.9;
+        }
+
+        &:focus {
+            outline: 2px solid var(--color-accent);
+            outline-offset: 2px;
+        }
     }
 
     &__content {
