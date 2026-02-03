@@ -19,6 +19,7 @@
     @use './styles/mixins/media-query';
     @use './styles/components/button';
     @use './styles/typography';
+    @use './styles/spacing';
 
     body {
         display: flex;
