@@ -46,6 +46,7 @@
 
     .hr {
         height: 1px;
+        grid-column: 1 / -1;
         width: 100%;
         background-color: var(--color-accent);
     }
