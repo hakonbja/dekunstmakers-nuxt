@@ -129,6 +129,7 @@ const formattedDate = computed(() => {
 <style lang="scss" scoped>
 @use '../../styles/mixins/display';
 @use '../../styles/mixins/media-query';
+@use '../../styles/mixins/hover-effect';
 
 .art-piece-details {
     @include display.grid(12);
@@ -151,11 +152,7 @@ const formattedDate = computed(() => {
         width: 100%;
         height: auto;
         cursor: pointer;
-        transition: opacity 0.2s;
-
-        &:hover {
-            opacity: 0.9;
-        }
+        @include hover-effect.image();
 
         &:focus {
             outline: 2px solid var(--color-accent);

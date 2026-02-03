@@ -1,0 +1,10 @@
+@mixin image() {
+    @media (hover: hover) {
+        overflow: hidden;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+            opacity: 0.9;
+        }
+    }
+}

@@ -80,6 +80,8 @@
 
 <style lang="scss">
 @use '../../styles/mixins/media-query';
+@use '../../styles/mixins/focus';
+@use '../../styles/mixins/hover-effect';
 
 .artist-details {
     grid-column: 1 / -1;
@@ -139,6 +141,8 @@
     }
 
     &__art-piece-link {
+        @include focus.image();
+        @include hover-effect.image();
         height: auto;
         display: block;
         line-height: 0;
