@@ -6,6 +6,7 @@
         <div class="right">
             <NuxtLink to="/erik" class="paragraph">Erik</NuxtLink>
             <NuxtLink to="/marja" class="paragraph">Marja</NuxtLink>
+            <NuxtLink to="/contact" class="paragraph">Contact</NuxtLink>
         </div>
     </header>
 </template>
