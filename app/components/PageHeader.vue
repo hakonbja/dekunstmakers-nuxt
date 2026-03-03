@@ -37,7 +37,7 @@ header {
 
 .right {
     display: flex;
-    gap: 16px;
+    gap: 8px;
 
     .paragraph {
         text-decoration: none;
