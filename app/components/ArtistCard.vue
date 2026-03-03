@@ -1,16 +1,20 @@
 <template>
-    <NuxtLink :to="`/${artist.slug}/collectie`" class="artist-card">
-        <img v-if="coverImageUrl" class="artist-card__cover-image" :src="coverImageUrl" :alt="artist.coverImage?.alternativeText" />
-        <div class="artist-card__content">
-            <h2 class="artist-card__name h4">{{ artist.firstName }} {{ artist.lastName }}</h2>
-            <p class="artist-card__title">{{ artist.title }}</p>
-            <p class="artist-card__intro">{{ artist.intro }}</p>
+    <div class="artist-card">
+        <NuxtLink :to="`/${artist.slug}/collectie`" class="artist-card__main-link">
+            <img v-if="coverImageUrl" class="artist-card__cover-image" :src="coverImageUrl" :alt="artist.coverImage?.alternativeText" />
+        </NuxtLink>
+        <div class="artist-card__bordered">
+            <NuxtLink :to="`/${artist.slug}/collectie`" class="artist-card__content">
+                <h2 class="artist-card__name h4">{{ artist.firstName }} {{ artist.lastName }}</h2>
+                <p class="artist-card__title">{{ artist.title }}</p>
+                <p class="artist-card__intro">{{ artist.intro }}</p>
+            </NuxtLink>
             <div class="artist-card__buttons">
                 <NuxtLink :to="`/${artist.slug}/collectie`" class="button"><span class="button__text">Collectie bekijken</span></NuxtLink>
                 <NuxtLink :to="`/${artist.slug}`" class="button button--secondary">Over {{artist.firstName}}</NuxtLink>
             </div>
         </div>
-    </NuxtLink>
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -32,11 +36,15 @@ const coverImageUrl = computed(() => getStrapiImageUrl(props.artist.coverImage, 
     display: flex;
     flex-direction: column;
     gap: 20px;
-    text-decoration: none;
-    color: inherit;
-    
+
     @include media-query.up(md) {
         grid-column: span 6;
+    }
+
+    &__main-link {
+        display: block;
+        text-decoration: none;
+        color: inherit;
     }
 
     &__cover-image {
@@ -45,12 +53,20 @@ const coverImageUrl = computed(() => getStrapiImageUrl(props.artist.coverImage, 
         object-fit: cover;
     }
 
-    &__content {
+    &__bordered {
         display: flex;
         flex-direction: column;
         flex-grow: 1;
         padding: 12px 16px;
         border: 1px solid var(--color-accent);
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        text-decoration: none;
+        color: inherit;
     }
 
     &__title {
@@ -66,7 +82,6 @@ const coverImageUrl = computed(() => getStrapiImageUrl(props.artist.coverImage, 
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        margin-top: auto;
         gap: 8px;
     }
 }
