@@ -24,12 +24,14 @@
 </template>
 
 <script setup lang="ts">
-import { useEvents, isUpcomingEvent, sortEventsSoonestFirst, groupEventsByYear } from '~~/utils/eventRepository'
+import { useEvents, isUpcomingEvent, sortEventsSoonestFirst, groupEventsByYear, todayIso } from '~~/utils/eventRepository'
 
 const { data: events } = await useEvents()
 
-const upcomingEvents = computed(() => sortEventsSoonestFirst((events.value || []).filter(e => isUpcomingEvent(e))))
-const pastEvents = computed(() => (events.value || []).filter(e => !isUpcomingEvent(e)))
+const today = useState('tentoonstellingen-today', () => todayIso())
+
+const upcomingEvents = computed(() => sortEventsSoonestFirst((events.value || []).filter(e => isUpcomingEvent(e, today.value))))
+const pastEvents = computed(() => (events.value || []).filter(e => !isUpcomingEvent(e, today.value)))
 const archiveByYear = computed(() => groupEventsByYear(pastEvents.value))
 </script>
 

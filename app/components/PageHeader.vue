@@ -38,6 +38,7 @@ header {
 
 .right {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
 
     .paragraph {

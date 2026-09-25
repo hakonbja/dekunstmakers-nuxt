@@ -9,12 +9,11 @@
         <a v-if="event.website" :href="event.website" target="_blank" rel="noopener noreferrer" class="event-details__website button button--secondary">Meer informatie</a>
     </div>
 
-    <div class="hr my-8"></div>
-
     <div class="event-art-pieces" v-if="sortedArtPieces.length > 0">
+        <div class="hr my-8"></div>
         <div class="event-art-pieces__grid">
             <div v-for="piece in sortedArtPieces" :key="piece.id" class="event-art-pieces__item">
-                <NuxtLink v-if="pieceImageUrl(piece)" :to="`/${piece.artist.slug}/${piece.slug}`" class="event-art-pieces__link">
+                <NuxtLink v-if="piece.artist && pieceImageUrl(piece)" :to="`/${piece.artist.slug}/${piece.slug}`" class="event-art-pieces__link">
                     <img class="event-art-pieces__image" :src="pieceImageUrl(piece)" :alt="piece.images[0]?.alternativeText || ''" />
                     <p class="event-art-pieces__artist-name">{{ piece.artist.firstName }} {{ piece.artist.lastName }}</p>
                 </NuxtLink>

@@ -1,7 +1,7 @@
 import { useAsyncData, useRuntimeConfig, createError } from '#imports';
 import type { Event } from '~~/types/Event';
 
-const todayIso = (): string => new Date().toISOString().slice(0, 10);
+export const todayIso = (): string => new Date().toISOString().slice(0, 10);
 
 export const isUpcomingEvent = (event: Event, today: string = todayIso()): boolean => {
     const lastDay = event.endDate ?? event.date;
@@ -38,7 +38,7 @@ export const groupEventsByYear = (events: Event[]): Array<{ year: string; events
 
 const formatDate = (isoDate: string): string => {
     const date = new Date(isoDate);
-    return new Intl.DateTimeFormat('nl-NL', { day: 'numeric', month: 'long', year: 'numeric' }).format(date);
+    return new Intl.DateTimeFormat('nl-NL', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(date);
 };
 
 export const formatEventDateRange = (event: Event): string => {
@@ -76,6 +76,10 @@ export const useEvents = () => {
                                     },
                                 },
                             },
+                            pagination: {
+                                pageSize: 100,
+                            },
+                            sort: 'date:desc',
                         },
                         headers: {
                             Authorization: `Bearer ${token}`,
