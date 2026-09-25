@@ -1,4 +1,4 @@
-import { useAsyncData, useRuntimeConfig, createError } from '#imports';
+import { useAsyncData, createError, useRuntimeConfig } from '#imports';
 import type { Event } from '~~/types/Event';
 
 export const todayIso = (): string => new Date().toISOString().slice(0, 10);
@@ -57,7 +57,7 @@ export const useEvents = () => {
         async () => {
             try {
                 const config = useRuntimeConfig()
-                const token = config.strapiApiToken || config.strapi?.token
+                const token = config.public.strapi?.token
 
                 if (!token) {
                     throw new Error('STRAPI_API_TOKEN is not configured')
