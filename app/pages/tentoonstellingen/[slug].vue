@@ -1,10 +1,4 @@
 <template>
-    <NuxtLink to="/tentoonstellingen" class="button button--tertiary back-link">
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M8.5 1L4 5.5L8.5 10" stroke="#121923" stroke-width="1.2"/>
-        </svg>
-        <span class="button__text">Terug naar tentoonstellingen</span>
-    </NuxtLink>
     <PageHeading
         :title="event.title"
         :subtitle="formatEventDateRange(event)"
@@ -13,6 +7,12 @@
         <p class="event-details__location"><span class="event-details__meta-label">Locatie:</span> {{ event.location }}</p>
         <div class="event-details__description" v-html="formattedDescription"></div>
         <a v-if="event.website" :href="event.website" target="_blank" rel="noopener noreferrer" class="event-details__website button button--secondary">Meer informatie</a>
+        <NuxtLink to="/tentoonstellingen" class="button button--tertiary back-link">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M8.5 1L4 5.5L8.5 10" stroke="#121923" stroke-width="1.2"/>
+            </svg>
+            <span class="button__text">Terug naar tentoonstellingen</span>
+        </NuxtLink>
     </div>
 
     <div class="event-art-pieces" v-if="sortedArtPieces.length > 0">
@@ -57,13 +57,6 @@ const pieceImageUrl = (piece: ArtPiece): string | undefined => {
 @use '../../styles/mixins/focus';
 @use '../../styles/mixins/hover-effect';
 
-.back-link {
-    grid-column: 1 / -1;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
 .event-details {
     grid-column: 1 / -1;
     display: flex;
@@ -89,6 +82,13 @@ const pieceImageUrl = (piece: ArtPiece): string | undefined => {
             align-self: flex-start;
         }
     }
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 8px;
 }
 
 .event-art-pieces {
