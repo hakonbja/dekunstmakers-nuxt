@@ -20,6 +20,8 @@
                 </div>
             </div>
         </section>
+
+        <p v-if="upcomingEvents.length === 0 && archiveByYear.length === 0" class="events__empty">Er zijn nog geen tentoonstellingen.</p>
     </div>
 </template>
 
@@ -66,6 +68,10 @@ const archiveByYear = computed(() => groupEventsByYear(pastEvents.value))
 
     &__year-label {
         margin-bottom: 12px;
+        color: var(--color-gray);
+    }
+
+    &__empty {
         color: var(--color-gray);
     }
 }
