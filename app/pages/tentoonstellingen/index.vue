@@ -7,7 +7,7 @@
         <section v-if="upcomingEvents.length > 0" class="events__section">
             <h3 class="events__section-label h4">Actueel</h3>
             <div class="events__list">
-                <EventCard v-for="event in upcomingEvents" :key="event.id" :event="event" />
+                <EventCard v-for="event in upcomingEvents" :key="event.id" :event="event" :heading-level="4" />
             </div>
         </section>
 
@@ -16,7 +16,7 @@
             <div v-for="{ year, events: yearEvents } in archiveByYear" :key="year" class="events__year">
                 <h4 :id="year" class="events__year-label h5">{{ year }}</h4>
                 <div class="events__list">
-                    <EventCard v-for="event in yearEvents" :key="event.id" :event="event" />
+                    <EventCard v-for="event in yearEvents" :key="event.id" :event="event" :heading-level="5" />
                 </div>
             </div>
         </section>

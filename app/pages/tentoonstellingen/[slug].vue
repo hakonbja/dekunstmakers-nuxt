@@ -5,7 +5,7 @@
     />
     <div class="event-details">
         <p class="event-details__location"><span class="event-details__meta-label">Locatie:</span> {{ event.location }}</p>
-        <p class="event-details__description">{{ event.description }}</p>
+        <div class="event-details__description" v-html="formattedDescription"></div>
         <a v-if="event.website" :href="event.website" target="_blank" rel="noopener noreferrer" class="event-details__website button button--secondary">Meer informatie</a>
     </div>
 
@@ -25,10 +25,12 @@
 <script setup lang="ts">
 import { useEventBySlug, formatEventDateRange } from '~~/utils/eventRepository'
 import { getStrapiImageUrl } from '~~/utils/strapi'
+import { markdownToHtml } from '~~/utils/markdownFormatter'
 import type { ArtPiece } from '~~/types/ArtPiece'
 
 const route = useRoute()
 const event = await useEventBySlug(route.params.slug as string)
+const formattedDescription = computed(() => markdownToHtml(event.description))
 
 const sortedArtPieces = computed(() => {
     return [...(event.art_pieces || [])].sort((a, b) => {
@@ -57,6 +59,14 @@ const pieceImageUrl = (piece: ArtPiece): string | undefined => {
 
     &__meta-label {
         color: var(--color-gray);
+    }
+
+    &__description :deep(p + p) {
+        margin-top: 8px;
+
+        @include media-query.up(md) {
+            margin-top: 12px;
+        }
     }
 
     &__website {

@@ -1,6 +1,6 @@
 <template>
     <NuxtLink :to="`/tentoonstellingen/${event.slug}`" class="event-card">
-        <h3 class="event-card__title h5">{{ event.title }}</h3>
+        <component :is="`h${headingLevel}`" class="event-card__title h5">{{ event.title }}</component>
         <p class="event-card__meta">{{ formatEventDateRange(event) }}</p>
         <p class="event-card__meta">{{ event.location }}</p>
     </NuxtLink>
@@ -10,9 +10,12 @@
 import type { Event } from '~~/types/Event'
 import { formatEventDateRange } from '~~/utils/eventRepository'
 
-defineProps<{
+withDefaults(defineProps<{
     event: Event;
-}>();
+    headingLevel?: 3 | 4 | 5 | 6;
+}>(), {
+    headingLevel: 3,
+});
 </script>
 
 <style lang="scss" scoped>
