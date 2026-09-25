@@ -1,4 +1,10 @@
 <template>
+    <NuxtLink to="/tentoonstellingen" class="button button--tertiary back-link">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M8.5 1L4 5.5L8.5 10" stroke="#121923" stroke-width="1.2"/>
+        </svg>
+        <span class="button__text">Terug naar tentoonstellingen</span>
+    </NuxtLink>
     <PageHeading
         :title="event.title"
         :subtitle="formatEventDateRange(event)"
@@ -50,6 +56,13 @@ const pieceImageUrl = (piece: ArtPiece): string | undefined => {
 @use '../../styles/mixins/media-query';
 @use '../../styles/mixins/focus';
 @use '../../styles/mixins/hover-effect';
+
+.back-link {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
 
 .event-details {
     grid-column: 1 / -1;
