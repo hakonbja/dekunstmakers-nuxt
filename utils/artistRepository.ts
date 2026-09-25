@@ -25,7 +25,11 @@ export const useArtists = () => {
                         params: {
                             populate: {
                                 art_pieces: {
-                                    populate: '*',
+                                    populate: {
+                                        images: true,
+                                        artist: true,
+                                        events: true,
+                                    },
                                 },
                                 coverImage: true,
                                 biographyImage: true,
