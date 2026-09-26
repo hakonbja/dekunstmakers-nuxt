@@ -1,4 +1,5 @@
 import type { Image } from './Image'
+import type { Event } from './Event'
 
 export interface ArtPiece {
     id: number;
@@ -28,5 +29,5 @@ export interface ArtPiece {
         intro: string;
         biography: string;
     };
-    event: Record<string, any> | null;
+    events?: Event[];
 }

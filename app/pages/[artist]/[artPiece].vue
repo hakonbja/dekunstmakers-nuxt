@@ -36,6 +36,13 @@
                     <a :href="`mailto:${artist.email}`" class="button button--primary">Contact opnemen</a>
                     <NuxtLink :to="`/${artist.slug}/collectie#${artPiece.slug}`" class="button button--secondary">Bekijk in collectie</NuxtLink>
                 </div>
+                <div v-if="sortedEvents.length > 0" class="art-piece-details__events">
+                    <div class="hr"></div>
+                    <p class="art-piece-details__meta-label">Te zien bij:</p>
+                    <div class="art-piece-details__events-list">
+                        <EventCard v-for="event in sortedEvents" :key="event.id" :event="event" />
+                    </div>
+                </div>
             </div>
             <div class="art-piece-details__navigation">
                 <NuxtLink v-if="previousArtPiece" :to="previousArtPiece" class="button button--tertiary art-piece-details__navigation-button art-piece-details__navigation-button--previous">
@@ -59,11 +66,13 @@
 import { useArtistBySlug } from '~~/utils/artistRepository';
 import { useArtPieceBySlug, getPreviousArtPiece, getNextArtPiece } from '~~/utils/artPieceRepository';
 import { getStrapiImageUrl } from '~~/utils/strapi';
+import { sortEventsMostRecentFirst } from '~~/utils/eventRepository';
 
 const route = useRoute();
 const artist = await useArtistBySlug(route.params.artist as string);
 const artPiece = await useArtPieceBySlug(artist, route.params.artPiece as string);
 const pieceImageUrl = computed(() => getStrapiImageUrl(artPiece.images[0]));
+const sortedEvents = computed(() => sortEventsMostRecentFirst(artPiece.events || []));
 
 const previousArtPiece = computed(() => {
     const previousArtPiece = getPreviousArtPiece(artist, artPiece.slug);
@@ -194,6 +203,18 @@ const formattedDate = computed(() => {
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: space-between;
+    }
+
+    &__events {
+        display: flex;
+        flex-direction: column;
+        row-gap: 12px;
+    }
+
+    &__events-list {
+        display: flex;
+        flex-direction: column;
+        row-gap: 8px;
     }
 
     &__navigation {

@@ -6,6 +6,7 @@
         <div class="right">
             <NuxtLink to="/erik" class="paragraph">Erik</NuxtLink>
             <NuxtLink to="/marja" class="paragraph">Marja</NuxtLink>
+            <NuxtLink to="/tentoonstellingen" class="paragraph">Tentoonstellingen</NuxtLink>
             <NuxtLink to="/contact" class="paragraph">Contact</NuxtLink>
         </div>
     </header>
@@ -37,6 +38,7 @@ header {
 
 .right {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
 
     .paragraph {

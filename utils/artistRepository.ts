@@ -1,4 +1,4 @@
-import { useAsyncData, useRuntimeConfig, createError } from '#imports';
+import { useAsyncData, createError, useRuntimeConfig } from '#imports';
 import type { Artist } from '~~/types/Artist';
 
 export function sortArtists(artists: Artist[]): Artist[] {
@@ -11,13 +11,12 @@ export const useArtists = () => {
         async () => {
             try {
                 const config = useRuntimeConfig()
-                const token = config.strapiApiToken || config.strapi?.token
-                
+                const token = config.public.strapi?.token
+
                 if (!token) {
                     throw new Error('STRAPI_API_TOKEN is not configured')
                 }
-                
-                // Use useStrapiClient directly with explicit headers to ensure token is sent
+
                 const client = useStrapiClient()
                 const response = await client<{ data: Array<{ attributes?: Artist; id?: number } | Artist> }>(
                     '/artists',
@@ -25,7 +24,11 @@ export const useArtists = () => {
                         params: {
                             populate: {
                                 art_pieces: {
-                                    populate: '*',
+                                    populate: {
+                                        images: true,
+                                        artist: true,
+                                        events: true,
+                                    },
                                 },
                                 coverImage: true,
                                 biographyImage: true,
